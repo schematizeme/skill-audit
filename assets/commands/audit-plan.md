@@ -11,7 +11,8 @@ julgar item antes do inventário fechado.** Auditar sem contar é auditar incomp
    - `find <archive> -name '*.md'`; `grep -rn -- '- \[ \]\|- \[~\]\|- \[x\]' <archive> .`;
      `grep -rni 'EM ABERTO\|TODO\|PENDENTE\|FIXME\|on-hold' <archive>`;
      `git log --diff-filter=D --name-only --pretty=format: | sort -u` (checklists que sumiram);
-   - overdev: `.overdev/CHECKLIST.md`, `<archive>/overdev/OBJETIVO.md`, `premature-stops.log`,
+   - overdev (procure em `.schematize/overdev/` novo **E** em `.overdev/` legado):
+     `.schematize/overdev/CHECKLIST.md`, `<archive>/overdev/OBJETIVO.md`, `premature-stops.log`,
      `./PERGUNTAS-OVERDEV.txt`, `DECISOES.md`/`PLAN.md`; Q.A.: `<archive>/qa/*.md`;
      contexto: `<archive>/context/*-checklist.md`; plano: `<archive>/plan/*.md`; ADRs `proposed`.
 

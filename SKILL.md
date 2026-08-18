@@ -1,7 +1,7 @@
 ---
 name: schematize-audit
 metadata:
-  version: 0.1.0
+  version: 0.2.0
 description: Auditoria de histórico da casa — a disciplina que prova que TODO checklist criado no projeto foi mesmo SANADO, não só marcado. Enumera e CONTA exaustivamente todas as fontes de checklist/promessa (overdev CHECKLIST/OBJETIVO/premature-stops/PERGUNTAS parkeadas, Q.A. plan-first, handoffs de contexto FEITO-vs-ABERTO, planos do eng-plan, ADRs proposed, qualquer MD com `- [ ]`/`- [~]`/"EM ABERTO") do archive e do histórico git; classifica cada item (feito/aberto/on-hold); acha os **órfãos RED** — aberto que nunca fechou, on-hold cuja pergunta ninguém respondeu, ADR proposed que nunca virou accepted/rejected, e "feito" sem prova (checkbox sem teste/commit/arquivo/gate que passa hoje → VOLTA a aberto, mesma disciplina do red-first e do "suspeito ≠ achado" da schematize-pentest); mede cobertura A/A (artefatos auditados == existentes); gera um checklist de SANEAMENTO dos órfãos (candidato a /eng-overdev) e TRAVA o veredito enquanto sobrar um órfão RED. Saída machine-readable + relatório gravado em `<projeto>_archive/audit/`. Roda em fim de marco, retomada de projeto parado, periódico/agendado e depois de um scan grande. Use SEMPRE que for auditar, fechar loop, validar "está pronto?" no macro, retomar projeto parado, ou garantir que os achados de um scan/plano viraram itens fechados — mesmo sem citar "auditoria". Pareia com a schematize-engineering (a BASE: overdev, DoD §35, archive §28, índice §39) e com a schematize-pentest (o oráculo do "feito de verdade").
 ---
 
@@ -17,7 +17,7 @@ Esta skill fecha o loop `scan → plan → refactor → overdev` provando que o 
 com item aberto; a auditoria garante que **nenhum item aberto ficou órfão no rastro** — e que
 "feito" quer dizer feito, **com prova**.
 
-**Versão:** skill `schematize-audit` v0.1.0. Changelog em `CHANGELOG.md`.
+**Versão:** skill `schematize-audit` v0.2.0. Changelog em `CHANGELOG.md`.
 
 ## Comandos (Claude Code)
 

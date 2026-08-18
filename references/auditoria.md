@@ -19,9 +19,9 @@ incompleta.
 
 | Fonte | Onde | O que carrega |
 |---|---|---|
-| **Overdev — run ativo** | `.overdev/CHECKLIST.md`, `.overdev/state.json` | itens `- [ ]`/`- [x]`/`- [~]` do run corrente |
+| **Overdev — run ativo** | procure em `.schematize/overdev/CHECKLIST.md`, `.schematize/overdev/state.json` (novo layout) **E** em `.overdev/CHECKLIST.md`, `.overdev/state.json` (legado) | itens `- [ ]`/`- [x]`/`- [~]` do run corrente |
 | **Overdev — registro durável** | `<projeto>_archive/overdev/OBJETIVO.md` | o checklist espelhado (registro humano) |
-| **Overdev — decisões/plano** | `.overdev/DECISOES.md`, `.overdev/PLAN.md` (+ espelho no archive) | decisões ADR-lite e o mapa decisão→item |
+| **Overdev — decisões/plano** | procure em `.schematize/overdev/DECISOES.md`, `.schematize/overdev/PLAN.md` (novo) **E** em `.overdev/DECISOES.md`, `.overdev/PLAN.md` (legado) — + espelho no archive | decisões ADR-lite e o mapa decisão→item |
 | **Overdev — paradas prematuras** | `<projeto>_archive/overdev/premature-stops.log` | ciclos em que o agente tentou parar com item aberto (timestamp + itens que faltavam) |
 | **Overdev — perguntas parkeadas** | `./PERGUNTAS-OVERDEV.txt` (base do projeto) | dúvidas on-hold que o usuário deveria ter respondido |
 | **Q.A. plan-first** | `<projeto>_archive/qa/*.md` | planos de Q.A. aprovados (passo a passo) |

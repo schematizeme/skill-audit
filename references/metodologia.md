@@ -15,8 +15,9 @@ Auditar sem contar é auditar incompleto. O `/audit-plan` roda primeiro:
    - `grep -rni 'EM ABERTO\|TODO\|PENDENTE\|FIXME\|on-hold' <projeto>_archive` — seções soltas.
    - `git log --diff-filter=D --name-only --pretty=format: | sort -u` — MDs de checklist que
      **sumiram** do rastro (podem esconder itens abandonados).
-   - `ls .overdev/ ./PERGUNTAS-OVERDEV.txt <projeto>_archive/overdev/premature-stops.log` —
-     os artefatos do overdev.
+   - `ls .schematize/overdev/ .overdev/ ./PERGUNTAS-OVERDEV.txt <projeto>_archive/overdev/premature-stops.log` —
+     os artefatos do overdev (procure em `.schematize/overdev/` no layout novo **E** em
+     `.overdev/` no legado; `PERGUNTAS-OVERDEV.txt` fica na raiz do projeto em ambos).
 2. **Inventário numerado.** Liste **cada** artefato encontrado com um índice (`F1..Fn`). Esse
    `n` é a **cobertura-alvo**: a auditoria só fecha quando os `n` foram lidos e classificados.
 3. **Escopo e recorte.** Projeto grande? recorte por marco/módulo/janela de data — mas **declare

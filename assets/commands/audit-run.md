@@ -10,8 +10,9 @@ enumeração aqui primeiro.
 
 ## 1. Enumere as fontes (e CONTE — `references/auditoria.md` §1, `metodologia.md` §2)
 Varra o archive `${ARGUMENTS:-<projeto>_archive}`, o worktree **e** o histórico git:
-- overdev: `.overdev/CHECKLIST.md`, `<archive>/overdev/OBJETIVO.md`, `premature-stops.log`,
-  `./PERGUNTAS-OVERDEV.txt`, `DECISOES.md`/`PLAN.md`;
+- overdev (procure em `.schematize/overdev/` novo **E** em `.overdev/` legado):
+  `.schematize/overdev/CHECKLIST.md`, `<archive>/overdev/OBJETIVO.md`, `premature-stops.log`,
+  `./PERGUNTAS-OVERDEV.txt` (raiz do projeto), `DECISOES.md`/`PLAN.md`;
 - Q.A.: `<archive>/qa/*.md`; contexto/handoff: `<archive>/context/*-checklist.md`; plano:
   `<archive>/plan/*.md`; ADRs `proposed`; scan: `<archive>/scan/*.md`; qualquer MD com
   `- [ ]`/`- [~]`/"EM ABERTO"; `git log --diff-filter=D` (o que sumiu do rastro).

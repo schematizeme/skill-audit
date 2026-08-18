@@ -2,6 +2,21 @@
 
 Formato: [Keep a Changelog](https://keepachangelog.com/pt-BR/). Versionamento semântico.
 
+## [0.2.0] — 2026-08-18
+
+Acompanha a migração do layout operacional do projeto de `.overdev/` para
+`.schematize/overdev/` (o motor Rust lê ambos, com fallback ao legado, e auto-migra no
+`overdev start`).
+
+### Alterado
+- A auditoria passa a enumerar as fontes de checklist do overdev no **novo layout**
+  `.schematize/overdev/` (`CHECKLIST.md`, `state.json`, `DECISOES.md`, `PLAN.md`) **E** no
+  layout **legado** `.overdev/` — projetos antigos ainda têm `.overdev/`, então ambos contam
+  como fonte a auditar. Atualizados `references/auditoria.md`, `references/metodologia.md`,
+  `assets/commands/audit-plan.md`, `assets/commands/audit-run.md`.
+- `PERGUNTAS-OVERDEV.txt` continua na **raiz do projeto** e o espelho durável segue em
+  `<projeto>_archive/overdev/` — inalterados.
+
 ## [0.1.0] — 2026-08-15
 
 Primeira versão da skill de **auditoria de histórico** da casa — a disciplina "todo checklist
