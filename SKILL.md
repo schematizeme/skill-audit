@@ -1,7 +1,7 @@
 ---
 name: schematize-audit
 metadata:
-  version: 0.2.0
+  version: 0.3.0
 description: Auditoria de histórico da casa — a disciplina que PROVA que todo checklist criado no projeto foi mesmo sanado, não só marcado. Enumera e conta exaustivamente as fontes de promessa (overdev CHECKLIST/OBJETIVO/premature-stops/perguntas parkeadas, Q.A. plan-first, handoffs FEITO-vs-ABERTO, planos, ADRs `proposed`, qualquer MD com `- [ ]`/`- [~]`/"EM ABERTO") no archive e no git; classifica cada item (feito/aberto/on-hold); acha os ÓRFÃOS RED — aberto que nunca fechou, on-hold sem resposta, ADR `proposed` eterno, e "feito" sem prova (checkbox sem teste/commit/arquivo/gate que passa hoje VOLTA a aberto); mede cobertura A/A; gera o checklist de saneamento e TRAVA o veredito enquanto sobrar um órfão RED. Saída em `<projeto>_archive/audit/`. Use SEMPRE que for auditar, fechar loop, validar "está pronto?" no macro, retomar projeto parado, ou garantir que os achados de um scan/plano viraram itens fechados — mesmo sem citar "auditoria".
 ---
 
@@ -17,7 +17,20 @@ Esta skill fecha o loop `scan → plan → refactor → overdev` provando que o 
 com item aberto; a auditoria garante que **nenhum item aberto ficou órfão no rastro** — e que
 "feito" quer dizer feito, **com prova**.
 
-**Versão:** skill `schematize-audit` v0.2.0. Changelog em `CHANGELOG.md`.
+**Versão:** skill `schematize-audit` v0.3.0. Changelog em `CHANGELOG.md`.
+
+
+## Artefatos executáveis
+
+A skill que dá o **veredito formal** prometia saída machine-readable e gate que trava, e entregava
+um **exemplo em prosa**: sem schema, sem validador, sem exit code (vistoria de 2026-08-21).
+
+| Artefato | O que é |
+|---|---|
+| `assets/schemas/audit-run.schema.json` | o formato do JSON da auditoria — cobertura, totais, as 5 espécies de órfão RED, veredito |
+| `scripts/audit-gate.mjs` | valida e decide: `0` histórico são · `1` **reprova** · `2` documento inválido. **Não acredita no campo `healthy`** — recalcula da lista |
+| `scripts/audit-gate.test.sh` | 20 casos, 18 vermelhos — o principal é o *veredito que mente* |
+| `assets/templates/audit.exemplo.json` | um relatório **realista**, que reprova: exemplo verde ensinaria o formato e esconderia o uso |
 
 ## Comandos (Claude Code)
 

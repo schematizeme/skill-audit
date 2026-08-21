@@ -42,7 +42,23 @@ que falta**. Gere o **checklist de saneamento** (os órfãos viram um **novo che
 a `/eng-overdev` — reabrir + resolver + verificar + reteste). Emita o **JSON** machine-readable
 (`metodologia.md` §4). Consolide o relatório com `/audit-report`.
 
-## 5. Gate
+## 5. Gate — com exit code
+
+Emita o JSON em `<projeto>_archive/audit/<data>.json` no schema
+`assets/schemas/audit-run.schema.json` e **rode o gate**:
+
+```bash
+node .claude/skills/schematize-audit/scripts/audit-gate.mjs <projeto>_archive/audit/<data>.json
+```
+
+`0` histórico são · `1` **reprova** · `2` documento inválido (conserte o JSON, nunca o schema).
+
+O gate **não acredita no campo `verdict.healthy`** — recalcula da lista. Reprova: veredito que se
+declara saudável com órfão vivo · `blocking_orphans` que não bate com a contagem · **cobertura
+incompleta** (e de novo se `not_audited` estiver vazio: auditoria que não sabe o que não viu) ·
+`totals.done_unproven` diferente dos órfãos `done_unproven` listados (feito sem prova volta a aberto
+**com nome**) · desfecho sem motivo escrito ou datado no futuro.
+
 Histórico são = **zero órfãos RED**. Qualquer aberto/hold/parkeado/feito-sem-prova sem desfecho
 **não fecha** — é dívida rastreável. A auditoria **não fecha** item (não marque `[x]`): quem
 fecha é o run de saneamento, com prova.

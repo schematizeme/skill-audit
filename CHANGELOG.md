@@ -1,6 +1,20 @@
 # Changelog — schematize-audit
 
-Formato: [Keep a Changelog](https://keepachangelog.com/pt-BR/). Versionamento semântico.
+Todas as mudanças relevantes deste pacote, no formato [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/),
+com versionamento [SemVer](https://semver.org/lang/pt-BR/).
+
+
+## [0.3.0] — 2026-08-21
+A skill que daria o **veredito formal** do catálogo prometia saída machine-readable e gate que trava, e entregava **exemplo em prosa**: sem schema, sem validador, sem exit code (vistoria de 2026-08-21). A falta era estrutural — sem exit code, o gate da casa dependia de alguém ler bonito.
+
+### Adicionado
+- **`assets/schemas/audit-run.schema.json`** — o formato do JSON da auditoria: cobertura (com `not_audited`), totais, as **5 espécies** de órfão RED com origem `arquivo:linha` obrigatória, e o `resolution` como **desfecho explícito, datado e com motivo**.
+- **`scripts/audit-gate.mjs`** — o validador e o exit code (`0`/`1`/`2`). O ponto de projeto: ele **não acredita no campo `verdict.healthy`** — recalcula a partir da lista. Relatório que se declara saudável com órfão vivo é **pior que nenhum relatório**, porque autoriza o release; o gate chama isso pelo nome e reprova. Também reprova cobertura incompleta (e de novo quando `not_audited` está vazio — auditoria que não sabe o que não viu), `totals.done_unproven` que não bate com os órfãos listados (feito sem prova volta a aberto **com nome**, não como número no resumo), motivo de uma palavra e desfecho datado no futuro.
+- **`scripts/audit-gate.test.sh`** — **20 casos**, 18 vermelhos, incluindo `veredito-mente`, `cobertura-parcial-cega` e `waiver-sem-motivo`.
+- **`assets/templates/audit.exemplo.json`** — um relatório **realista**, que **reprova**: um exemplo verde ensinaria o formato e esconderia o uso.
+
+### Mudado
+- `references/metodologia.md` §4 e §5 e `/audit-run` §5 passam a apontar para o artefato, com o comando e os três exit codes.
 
 ## [0.2.0] — 2026-08-18
 

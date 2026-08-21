@@ -53,6 +53,12 @@ Classificar não basta: cada estado tem um cruzamento (§2/§3 do `auditoria.md`
 
 ## 4. Saída machine-readable (JSON) — o control-plane da auditoria
 
+> **Isto tem schema, validador e exit code.** `assets/schemas/audit-run.schema.json` é o formato;
+> `scripts/audit-gate.mjs` valida e dá o veredito (`0` são · `1` **reprova** · `2` documento
+> inválido); `scripts/audit-gate.test.sh` (20 casos) é onde cada regra foi **vista reprovando**.
+> Até 2026-08-21 isto era um exemplo em prosa — na skill que daria o veredito formal do catálogo.
+
+
 Além do relatório humano (`relatorio.md`), a auditoria emite um **JSON** determinístico, pra CI
 e pro painel poderem ler o veredito sem parsear prosa. Formato sugerido
 (`<projeto>_archive/audit/<data>.json`):
@@ -83,14 +89,28 @@ e pro painel poderem ler o veredito sem parsear prosa. Formato sugerido
 ```
 
 - `kind ∈ { open_never_closed, on_hold_unanswered, parked_question_pending, adr_proposed_orphan, done_unproven }` — as cinco espécies de órfão RED (§4 do `auditoria.md`).
-- `verdict.healthy = (blocking_orphans == 0)`. É o campo que o gate lê.
+- `verdict.healthy = (blocking_orphans == 0)`. É o campo que o gate lê — e ele **não acredita no
+  campo**: recalcula a partir da lista. Relatório que se declara saudável com órfão vivo é **pior que
+  nenhum relatório**, porque autoriza o release; o gate chama isso pelo nome (*o veredito mente*) e
+  reprova.
+- **`coverage.complete = false` reprova**, e reprova de novo se `not_audited` estiver vazio:
+  auditoria que não sabe o que não viu. "Não achei" nunca é "não há".
+- **`totals.done_unproven` tem de bater com os órfãos `done_unproven` listados**: feito sem prova
+  volta a ABERTO **com nome**, não como número no resumo.
+- Um órfão só sai da contagem bloqueante com `resolution` — **desfecho explícito, datado e com
+  motivo escrito**. Motivo de uma palavra reprova; data no futuro reprova.
 
 ## 5. Gate — trava em órfão RED
 
 O veredito é binário: **histórico são só com zero órfãos RED**.
 
 - **Exit code / veredito:** `verdict.healthy == false` → a auditoria **reprova**. Em CI, sai
-  não-zero; num run macro, bloqueia o "pronto".
+  não-zero; num run macro, bloqueia o "pronto". Concretamente:
+
+  ```bash
+  node scripts/audit-gate.mjs <projeto>_archive/audit/<data>.json
+  # 0 = histórico são · 1 = REPROVA · 2 = documento inválido
+  ```
 - **Sem waiver silencioso:** um órfão só sai da lista quando **sanado** (fechado com prova) ou
   **reclassificado com desfecho explícito e datado** (ex.: ADR `proposed` → `rejected` com
   motivo). "Ignorar por ora" não zera o órfão — no máximo vira um item datado do saneamento.
