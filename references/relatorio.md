@@ -43,7 +43,7 @@ Agrupe pelas cinco espécies (§4 do `auditoria.md`). Cada órfão em uma linha 
 | `open_never_closed` | `overdev/OBJETIVO.md:41` (2026-06-02) | migração reversível do billing | migration `down` + teste de rollback | 74d |
 | `done_unproven` | `plan/2026-05-10.md:22` | rate-limit em `/login` | marcado `[x]`, sem middleware nem teste → **reaberto** | — |
 | `on_hold_unanswered` | `PERGUNTAS-OVERDEV.txt:3` | formato do webhook de repasse | usuário nunca respondeu; item on-hold parado | 40d |
-| `adr_proposed_orphan` | `archive/adr/0007.md` | escolha de fila (SQS vs NATS) | `proposed` há 2 meses; nunca `accepted`/`rejected` | 61d |
+| `adr_proposed_orphan` | `<projeto>_archive/decisoes/0007.md` | escolha de fila (SQS vs NATS) | `proposed` há 2 meses; nunca `accepted`/`rejected` | 61d |
 
 Os tipos: `open_never_closed`, `on_hold_unanswered`, `parked_question_pending`,
 `adr_proposed_orphan`, `done_unproven`.
