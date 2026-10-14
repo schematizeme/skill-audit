@@ -1,7 +1,7 @@
 ---
 name: schematize-audit
 metadata:
-  version: 0.4.1
+  version: 0.5.0
 description: >-
   Prova que checklist, plano, handoff e ADR `proposed` foram sanados, não só marcados: conta promessas no archive e no git (`audit-gate.mjs`). Use ao auditar ou fechar loop.
 ---
@@ -18,7 +18,7 @@ Esta skill fecha o loop `scan → plan → refactor → overdev` provando que o 
 com item aberto; a auditoria garante que **nenhum item aberto ficou órfão no rastro** — e que
 "feito" quer dizer feito, **com prova**.
 
-**Versão:** skill `schematize-audit` v0.4.1. Changelog em `CHANGELOG.md`.
+**Versão:** skill `schematize-audit` v0.5.0. Changelog em `CHANGELOG.md`.
 
 
 ## Artefatos executáveis
