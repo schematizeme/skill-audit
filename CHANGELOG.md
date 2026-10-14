@@ -4,6 +4,12 @@ Todas as mudanças relevantes deste pacote, no formato [Keep a Changelog](https:
 com versionamento [SemVer](https://semver.org/lang/pt-BR/).
 
 
+## [0.4.1] — 2026-10-14
+Reduz a description para o orçamento de listagem.
+
+### Alterado
+- Description reduzida (≤235 chars) para caber no orçamento de listagem de skills (soma ≤8300); mesmo território, fronteiras com as irmãs preservadas.
+
 ## [0.4.0] — 2026-10-14
 Saneamento: o exemplo de JSON do `metodologia.md` não passava no próprio gate e vários caminhos/citações estavam errados.
 

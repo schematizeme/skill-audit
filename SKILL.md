@@ -3,9 +3,8 @@ name: schematize-audit
 metadata:
   version: 0.4.0
 description: >-
-  Audita o histórico do projeto e PROVA que cada checklist, plano, handoff e ADR `proposed` foi sanado, não só
-  marcado: conta promessas no archive e no git, acha órfãos RED e trava o veredito (`audit-gate.mjs`). Use ao
-  auditar, fechar loop ou retomar projeto parado.
+  Audita o histórico e PROVA que cada checklist, plano, handoff e ADR `proposed` foi sanado, não só marcado: conta
+  promessas no archive e no git, acha órfãos RED, trava o veredito (`audit-gate.mjs`). Use ao auditar ou fechar loop.
 ---
 
 # Auditoria de histórico da casa (schematize-audit)
