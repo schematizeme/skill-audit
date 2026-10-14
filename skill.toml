@@ -3,7 +3,7 @@ name = "schematize-audit"
 tag = "Ferramenta · Auditoria"
 status = "beta"
 order = 12
-current_version = "0.4.0"
+current_version = "0.4.1"
 href = "/audit"
 
 [descriptions]
