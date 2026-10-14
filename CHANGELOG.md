@@ -14,6 +14,7 @@ Saneamento: o exemplo de JSON do `metodologia.md` não passava no próprio gate 
 - `SKILL.md`/`metodologia.md`: removida a contagem fixa de casos do `audit-gate.test.sh`.
 - `metodologia.md`: `grep` com caminho único e `--exclude-dir=.git`; `ls ... 2>/dev/null`; `audit-gate.mjs` pelo caminho instalado (`.claude/skills/schematize-audit/scripts/`).
 - `description` reescrita (<=350 caracteres).
+- **Description** reduzida (~270 chars) para caber no orçamento de listagem (soma das 31 skills ≤ 8500; o Claude Code corta a listagem acima disso).
 
 ## [0.3.0] — 2026-08-21
 A skill que daria o **veredito formal** do catálogo prometia saída machine-readable e gate que trava, e entregava **exemplo em prosa**: sem schema, sem validador, sem exit code (vistoria de 2026-08-21). A falta era estrutural — sem exit code, o gate da casa dependia de alguém ler bonito.
