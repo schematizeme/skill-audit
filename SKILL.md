@@ -1,7 +1,7 @@
 ---
 name: schematize-audit
 metadata:
-  version: 0.3.0
+  version: 0.4.0
 description: >-
   Audita o histórico do projeto e PROVA que cada checklist, plano, handoff e ADR `proposed` foi sanado, não só
   marcado: conta promessas no archive e no git, acha órfãos RED e trava o veredito (`audit-gate.mjs`). Use ao
@@ -20,7 +20,7 @@ Esta skill fecha o loop `scan → plan → refactor → overdev` provando que o 
 com item aberto; a auditoria garante que **nenhum item aberto ficou órfão no rastro** — e que
 "feito" quer dizer feito, **com prova**.
 
-**Versão:** skill `schematize-audit` v0.3.0. Changelog em `CHANGELOG.md`.
+**Versão:** skill `schematize-audit` v0.4.0. Changelog em `CHANGELOG.md`.
 
 
 ## Artefatos executáveis
