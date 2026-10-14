@@ -4,6 +4,17 @@ Todas as mudanças relevantes deste pacote, no formato [Keep a Changelog](https:
 com versionamento [SemVer](https://semver.org/lang/pt-BR/).
 
 
+## [0.4.0] — 2026-10-14
+Saneamento: o exemplo de JSON do `metodologia.md` não passava no próprio gate e vários caminhos/citações estavam errados.
+
+### Corrigido
+- `metodologia.md`: exemplo do relatório agora tem o campo obrigatório `schema` e `resolution` nos órfãos; "formato sugerido" → "obrigatório". Provado rodando `audit-gate.mjs` no exemplo extraído: exit 0 (e exit 1 sem `resolution`, exit 2 sem `schema`).
+- `auditoria.md`: removido `assets/ADR.md` (template) das fontes de ADR `proposed`; a fonte é só `<projeto>_archive/decisoes/`. "pisos §6" → §37 (também em `evidencias.md`).
+- `relatorio.md`: `decisoes/0007.md` / `adr/0007` → `decisoes/ADR-0007-<slug>.md`.
+- `SKILL.md`/`metodologia.md`: removida a contagem fixa de casos do `audit-gate.test.sh`.
+- `metodologia.md`: `grep` com caminho único e `--exclude-dir=.git`; `ls ... 2>/dev/null`; `audit-gate.mjs` pelo caminho instalado (`.claude/skills/schematize-audit/scripts/`).
+- `description` reescrita (<=350 caracteres).
+
 ## [0.3.0] — 2026-08-21
 A skill que daria o **veredito formal** do catálogo prometia saída machine-readable e gate que trava, e entregava **exemplo em prosa**: sem schema, sem validador, sem exit code (vistoria de 2026-08-21). A falta era estrutural — sem exit code, o gate da casa dependia de alguém ler bonito.
 

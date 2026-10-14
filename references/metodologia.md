@@ -11,11 +11,11 @@ Auditar sem contar é auditar incompleto. O `/audit-plan` roda primeiro:
 1. **Descoberta das fontes.** Varra `<projeto>_archive/` **e** o worktree **e** o histórico git.
    Comandos de partida (ajuste ao repo):
    - `find <projeto>_archive -name '*.md'` — todos os MDs do archive.
-   - `grep -rn -- '- \[ \]\|- \[~\]\|- \[x\]' <projeto>_archive . ` — linhas de checklist.
+   - `grep -rn --exclude-dir=.git -- '- \[ \]\|- \[~\]\|- \[x\]' <projeto>_archive` — linhas de checklist.
    - `grep -rni 'EM ABERTO\|TODO\|PENDENTE\|FIXME\|on-hold' <projeto>_archive` — seções soltas.
    - `git log --diff-filter=D --name-only --pretty=format: | sort -u` — MDs de checklist que
      **sumiram** do rastro (podem esconder itens abandonados).
-   - `ls .schematize/overdev/ .overdev/ ./PERGUNTAS-OVERDEV.txt <projeto>_archive/overdev/premature-stops.log` —
+   - `ls .schematize/overdev/ .overdev/ ./PERGUNTAS-OVERDEV.txt <projeto>_archive/overdev/premature-stops.log 2>/dev/null` —
      os artefatos do overdev (procure em `.schematize/overdev/` no layout novo **E** em
      `.overdev/` no legado; `PERGUNTAS-OVERDEV.txt` fica na raiz do projeto em ambos).
 2. **Inventário numerado.** Liste **cada** artefato encontrado com um índice (`F1..Fn`). Esse
@@ -55,38 +55,46 @@ Classificar não basta: cada estado tem um cruzamento (§2/§3 do `auditoria.md`
 
 > **Isto tem schema, validador e exit code.** `assets/schemas/audit-run.schema.json` é o formato;
 > `scripts/audit-gate.mjs` valida e dá o veredito (`0` são · `1` **reprova** · `2` documento
-> inválido); `scripts/audit-gate.test.sh` (20 casos) é onde cada regra foi **vista reprovando**.
+> inválido); `scripts/audit-gate.test.sh` é onde cada regra foi **vista reprovando**.
 > Até 2026-08-21 isto era um exemplo em prosa — na skill que daria o veredito formal do catálogo.
 
 
 Além do relatório humano (`relatorio.md`), a auditoria emite um **JSON** determinístico, pra CI
-e pro painel poderem ler o veredito sem parsear prosa. Formato sugerido
-(`<projeto>_archive/audit/<data>.json`):
+e pro painel poderem ler o veredito sem parsear prosa. Formato obrigatório
+(`<projeto>_archive/audit/<data>.json`; schema em `assets/schemas/audit-run.schema.json`):
 
 ```json
 {
+  "schema": "schematize-audit/run@1",
   "audit_date": "2026-08-15",
   "scope": "<projeto>_archive/** + worktree + git-history",
-  "coverage": { "artifacts_found": 12, "artifacts_audited": 12, "complete": true },
-  "totals": { "done": 84, "open": 5, "on_hold": 3, "done_unproven": 2 },
+  "coverage": { "artifacts_found": 12, "artifacts_audited": 12, "complete": true, "not_audited": [] },
+  "totals": { "done": 84, "open": 5, "on_hold": 3, "done_unproven": 1 },
   "orphans_red": [
     {
       "kind": "open_never_closed",
       "source": "<projeto>_archive/overdev/OBJETIVO.md:41",
       "item": "migração reversível do schema de billing",
       "missing": "sem migration down; teste de rollback ausente",
-      "since": "2026-06-02"
+      "since": "2026-06-02",
+      "resolution": { "outcome": "sanado", "date": "2026-08-15", "why": "migration down criada e teste de rollback verde no CI (commit a1b2c3d)." }
     },
     {
       "kind": "done_unproven",
       "source": "<projeto>_archive/plan/2026-05-10.md:22",
       "item": "rate-limit no endpoint /login",
-      "missing": "marcado [x] mas não há teste nem middleware no código atual → reaberto"
+      "missing": "marcado [x] mas não há teste nem middleware no código atual → reaberto",
+      "since": "2026-05-10",
+      "resolution": { "outcome": "sanado", "date": "2026-08-15", "why": "middleware de rate-limit implementado e teste que prova 429 no estouro passa." }
     }
   ],
-  "verdict": { "healthy": false, "blocking_orphans": 2 }
+  "verdict": { "healthy": true, "blocking_orphans": 0 }
 }
 ```
+
+Este exemplo é o estado **depois do saneamento** (ambos os órfãos têm `resolution`): o gate dá
+`exit 0`. Tire o `resolution` de um deles e `blocking_orphans` passa a 1, `healthy` a `false` e o
+gate dá `exit 1`. O `schema` é **obrigatório** (sem ele, `exit 2`).
 
 - `kind ∈ { open_never_closed, on_hold_unanswered, parked_question_pending, adr_proposed_orphan, done_unproven }` — as cinco espécies de órfão RED (§4 do `auditoria.md`).
 - `verdict.healthy = (blocking_orphans == 0)`. É o campo que o gate lê — e ele **não acredita no
@@ -108,7 +116,7 @@ O veredito é binário: **histórico são só com zero órfãos RED**.
   não-zero; num run macro, bloqueia o "pronto". Concretamente:
 
   ```bash
-  node scripts/audit-gate.mjs <projeto>_archive/audit/<data>.json
+  node .claude/skills/schematize-audit/scripts/audit-gate.mjs <projeto>_archive/audit/<data>.json
   # 0 = histórico são · 1 = REPROVA · 2 = documento inválido
   ```
 - **Sem waiver silencioso:** um órfão só sai da lista quando **sanado** (fechado com prova) ou

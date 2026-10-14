@@ -40,7 +40,7 @@ diz", é suspeita — o item **volta a aberto**.
 Provar cada `[x]` exaustivamente seria refazer o trabalho. Amostre por **risco**:
 
 - **Sempre verifica (100%):** caminho crítico, segurança/IAM, dados/migração, dinheiro,
-  qualquer item que a DoD (§35) ou os pisos (§6) da engenharia marcam como inegociável.
+  qualquer item que a DoD (§35) ou os pisos (§37) da engenharia marcam como inegociável.
 - **Amostra dirigida:** itens de risco médio — pegue uma amostra representativa por artefato;
   se a amostra mente (achou feito-sem-prova), **aprofunde** aquele artefato inteiro (um checkbox
   mentiroso é sinal de que os vizinhos também podem estar).

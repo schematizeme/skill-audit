@@ -43,7 +43,7 @@ Agrupe pelas cinco espécies (§4 do `auditoria.md`). Cada órfão em uma linha 
 | `open_never_closed` | `overdev/OBJETIVO.md:41` (2026-06-02) | migração reversível do billing | migration `down` + teste de rollback | 74d |
 | `done_unproven` | `plan/2026-05-10.md:22` | rate-limit em `/login` | marcado `[x]`, sem middleware nem teste → **reaberto** | — |
 | `on_hold_unanswered` | `PERGUNTAS-OVERDEV.txt:3` | formato do webhook de repasse | usuário nunca respondeu; item on-hold parado | 40d |
-| `adr_proposed_orphan` | `<projeto>_archive/decisoes/0007.md` | escolha de fila (SQS vs NATS) | `proposed` há 2 meses; nunca `accepted`/`rejected` | 61d |
+| `adr_proposed_orphan` | `<projeto>_archive/decisoes/ADR-0007-fila.md` | escolha de fila (SQS vs NATS) | `proposed` há 2 meses; nunca `accepted`/`rejected` | 61d |
 
 Os tipos: `open_never_closed`, `on_hold_unanswered`, `parked_question_pending`,
 `adr_proposed_orphan`, `done_unproven`.
@@ -57,7 +57,7 @@ Os órfãos viram um **novo checklist** — a projeção executável do conserto
 - [ ] billing: escrever migration `down` + teste de rollback (prova: aplica e reverte verde)  ← F1:41
 - [ ] /login: implementar rate-limit + teste que prova 429 no estouro (prova: teste passa)     ← F3:22 (reaberto)
 - [ ] webhook de repasse: obter resposta do usuário OU assumir default documentado + ADR       ← PERGUNTAS:3
-- [ ] fila SQS vs NATS: ratificar ADR 0007 (accepted/rejected com motivo datado)               ← adr/0007
+- [ ] fila SQS vs NATS: ratificar ADR-0007 (accepted/rejected com motivo datado)               ← decisoes/ADR-0007-fila.md
 ```
 
 Cada item aponta a **origem** (`Fi:linha`) e a **prova** que o fecha. Auditoria que aponta e não

@@ -27,7 +27,7 @@ incompleta.
 | **Q.A. plan-first** | `<projeto>_archive/qa/*.md` | planos de Q.A. aprovados (passo a passo) |
 | **Contexto / handoff** | `<projeto>_archive/context/*-checklist.md` | **FEITO vs EM ABERTO** de cada compactação/troca de sessão |
 | **Plano** | `<projeto>_archive/plan/*.md` | plano do `/eng-plan` (fases + DoD + checklist derivado) |
-| **ADR** | `assets/ADR.md`, ADRs em `<projeto>_archive/` | decisões marcadas `proposed` que nunca viraram `accepted`/`rejected` |
+| **ADR** | `<projeto>_archive/decisoes/ADR-NNNN-<slug>.md` | decisões marcadas `proposed` que nunca viraram `accepted`/`rejected` |
 | **Scan** | `<projeto>_archive/scan/*.md` | achados do `/eng-scan` (viraram itens fechados?) |
 | **Qualquer MD** | archive + histórico git | linhas `- [ ]` / `- [~]`, seções "TODO / EM ABERTO / PENDENTE / FIXME" |
 
@@ -76,7 +76,7 @@ tocam **caminho crítico**: existe o teste/commit/arquivo que prova? o gate corr
 > **estado de hoje**. Regressão silenciosa é órfão RED igual a item que nunca foi feito.
 
 Nem tudo é spot-check exaustivo (seria refazer o projeto). Priorize por risco: caminho crítico,
-segurança/IAM, dados/migração, pontos que a DoD (§35) e os pisos da engenharia (§6) marcam como
+segurança/IAM, dados/migração, pontos que a DoD (§35) e os pisos da engenharia (§37) marcam como
 inegociáveis. Item trivial marcado feito recebe amostragem; item crítico recebe verificação.
 
 ## 4. Órfão RED — a definição operacional
